@@ -32,6 +32,11 @@ public class SettingsController {
         this.userService = userService;
     }
 
+    /**
+     * Setup for general settings page
+     * @param model
+     * @return
+     */
     @GetMapping("/settings")
     public String settings(Model model) {
         model.addAttribute("menu", "settings");

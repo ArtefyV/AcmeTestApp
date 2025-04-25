@@ -51,7 +51,7 @@ surefire-reports/
 jacoco.exec
 
 # Sensitive files
-application.properties
+# application.properties
 application.yml
 .env
 secrets/
