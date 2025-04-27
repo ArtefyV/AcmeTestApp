@@ -25,7 +25,6 @@ public class SettingsController {
     private UserRepository userRepository;
     private final UserService userService;
 
-    @Autowired
     public SettingsController(GeneralSettingsRepository generalSettingsRepository, UserRepository userRepository, UserService userService) {
         this.generalSettingsRepository = generalSettingsRepository;
         this.userRepository = userRepository;

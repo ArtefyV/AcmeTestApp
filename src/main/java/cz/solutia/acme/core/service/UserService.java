@@ -18,7 +18,6 @@ public class UserService {
     private final PasswordValidator passwordValidator;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Autowired
     public UserService(UserRepository userRepository, PasswordValidator passwordValidator, BCryptPasswordEncoder bCryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.passwordValidator = passwordValidator;
@@ -72,15 +71,19 @@ public class UserService {
             return passwordErrors;
         }
 
-        // Encrypting and saving a new password
-        user.setPassword(bCryptPasswordEncoder.encode(passwordChangeDTO.getNewPassword()));
-        userRepository.save(user);
+        // Saving a new password
+        savePassword(user, passwordChangeDTO.getNewPassword());
 
         return List.of(); // An empty list means successful execution
     }
 
-    public void saveTemporaryPassword(User user, String temporaryPassword) {
-        user.setPassword(bCryptPasswordEncoder.encode(temporaryPassword));
+    /**
+     * Encrypting and saving a password for the user
+     * @param user
+     * @param password
+     */
+    public void savePassword(User user, String password) {
+        user.setPassword(bCryptPasswordEncoder.encode(password));
         userRepository.save(user);
     }
 }

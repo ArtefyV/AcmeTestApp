@@ -28,10 +28,12 @@ public class UserManagementController {
     @Value("${spring.mail.username}")
     private String mailUsername;
 
+    @Value("${password.min-length}")
+    private int passMinLength;
+
     private final UserService userService;
     private final JavaMailSender mailSender;
 
-    @Autowired
     public UserManagementController(JavaMailSender mailSender, UserService userService)
     {
         this.userService = userService;
@@ -72,9 +74,9 @@ public class UserManagementController {
         }
 
         User user = userOptional.get();
-        String temporaryPassword = UUID.randomUUID().toString().substring(0, 8);
+        String temporaryPassword = UUID.randomUUID().toString().substring(0, passMinLength);
         System.out.println("The temporary password: " + temporaryPassword); // For debugging purposes
-        userService.saveTemporaryPassword(user, temporaryPassword);
+        userService.savePassword(user, temporaryPassword);
 
         try {
             SimpleMailMessage message = new SimpleMailMessage();

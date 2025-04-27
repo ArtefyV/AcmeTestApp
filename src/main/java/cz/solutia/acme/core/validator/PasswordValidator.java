@@ -1,6 +1,7 @@
 package cz.solutia.acme.core.validator;
 
 import org.passay.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,6 +10,13 @@ import java.util.List;
 
 @Component
 public class PasswordValidator {
+
+    @Value("${password.min-length}")
+    private int minLength;
+
+    @Value("${password.max-length}")
+    private int maxLength;
+
     /**
      * Validates the password according to the rules:
      * - at least 8 characters
@@ -23,7 +31,7 @@ public class PasswordValidator {
      */
     public List<String> validate(String password) {
         org.passay.PasswordValidator validator = new org.passay.PasswordValidator(Arrays.asList(
-                new LengthRule(8, 100),                                     // at least 8 characters
+                new LengthRule(minLength, maxLength),                                     // at least 8 characters
                 new CharacterRule(EnglishCharacterData.UpperCase, 1),  // has at least one capital letter
                 new CharacterRule(EnglishCharacterData.LowerCase, 1),  // has at least one lowercase letter
                 new CharacterRule(EnglishCharacterData.Digit, 1),      // has at least one digit
