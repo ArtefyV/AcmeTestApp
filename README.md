@@ -64,8 +64,8 @@ Tato úloha nepopisuje případ požadavku na obnovení zapomenutého uživatels
 ### Dodatečné úpravy backendu aplikace
 - V kontroléru `UserManagementController` byla metoda `passwordResetAction()` koncového bodu `POST /password-reset` změněna tak, aby jako parametr přijímala e-mailovou adresu uživatele.
     - Tato metoda nejprve zkontroluje, zda v databázi existuje uživatel s příslušnou e-mailovou adresou, a poté vygeneruje dočasné heslo.
-    - Dočasné heslo je pak uloženo v tabulce `User`, dokud jej uživatel nezmění.
     - Pokud je server SMTP v nastavení aplikace správně nakonfigurován, odešle `JavaMailSender` uživateli zprávu s dočasným heslem.
+    - Dočasné heslo je pak uloženo v tabulce `User`, dokud jej uživatel nezmění. Heslo se do databáze uloží až po úspěšném odeslání e-mailu, aby nedošlo k situaci, kdy se staré heslo změní na dočasné heslo, které však uživateli nebylo doručeno.
 
 ### Dodatečné úpravy ve frontendové části aplikace
 - Byla vytvořena stránka `password-reset.html`, na kterou byl umístěn formulář s jediným polem pro e-mailovou adresu, kam bude po kontrole platnosti odesláno dočasné heslo pro přihlášení do aplikace.
