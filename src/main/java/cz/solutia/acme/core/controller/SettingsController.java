@@ -5,7 +5,6 @@ import cz.solutia.acme.core.model.User;
 import cz.solutia.acme.core.repository.GeneralSettingsRepository;
 import cz.solutia.acme.core.repository.UserRepository;
 import cz.solutia.acme.core.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;

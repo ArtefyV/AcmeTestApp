@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class DashboardController {
     @GetMapping("/")
     public String dashboard(Model model) {
+        model.addAttribute("message", "Dashboard");
         return "dashboard";
     }
 }

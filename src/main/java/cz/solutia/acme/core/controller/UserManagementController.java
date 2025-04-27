@@ -5,7 +5,6 @@ import cz.solutia.acme.core.service.UserService;
 import jakarta.validation.Valid;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -75,9 +74,8 @@ public class UserManagementController {
 
         User user = userOptional.get();
         String temporaryPassword = UUID.randomUUID().toString().substring(0, passMinLength);
-        System.out.println("The temporary password: " + temporaryPassword); // For debugging purposes
-        userService.savePassword(user, temporaryPassword);
-
+        System.out.println("The temporary password: " + temporaryPassword); // For debugging purposes only
+        // Send the temporary password to the user's email
         try {
             SimpleMailMessage message = new SimpleMailMessage();
             message.setTo(user.getEmail());
@@ -90,6 +88,8 @@ public class UserManagementController {
             model.addAttribute("errorMessage", "Unable to send the temporary password email.");
             return "password-reset";
         }
+        // Save the temporary password in the database after successful email sending.
+        userService.savePassword(user, temporaryPassword);
 
         model.addAttribute("successMessage", "If an account with the email "+email+" exists, we've sent you a link to reset your password.");
         return "login";

@@ -4,7 +4,6 @@ import cz.solutia.acme.core.dto.PasswordChangeDTO;
 import cz.solutia.acme.core.model.User;
 import cz.solutia.acme.core.repository.UserRepository;
 import cz.solutia.acme.core.validator.PasswordValidator;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

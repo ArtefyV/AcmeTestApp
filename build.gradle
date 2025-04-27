@@ -74,27 +74,6 @@ dependencies {
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
-tasks.withType(Test) {
-	enabled = false
-}
-
-tasks.named('jacocoTestReport') {
-	enabled = false
-}
-
 tasks.named('test') {
 	useJUnitPlatform()
-	finalizedBy jacocoTestReport
-}
-
-jacoco {
-	toolVersion = "0.8.8"
-}
-
-jacocoTestReport {
-	dependsOn test
-	reports {
-		xml.required = true
-		html.required = true
-	}
 }
