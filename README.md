@@ -75,6 +75,26 @@ Tato úloha nepopisuje případ požadavku na obnovení zapomenutého uživatels
 
 ---
 
+## JUnit testy
+
+Pro zajištění kontroly funkčnosti upravených a rozšířených částí aplikace byly vytvořeny následující testy pokrývající různé hraniční případy.
+
+### UserServiceTest
+Třída `UserServiceTest` obsahuje jednotkové testy pro metody služby `UserService`, které se zaměřují na změnu hesla uživatele. Testy pokrývají následující scénáře:
+- **Úspěšná změna hesla:** Ověřuje, že heslo je správně zašifrováno a uloženo do databáze, pokud jsou splněny všechny podmínky.
+- **Uživatel nenalezen:** Testuje, že metoda vrátí chybu, pokud uživatel s daným ID neexistuje.
+- **Nesprávné aktuální heslo:** Ověřuje, že změna hesla selže, pokud aktuální heslo neodpovídá uloženému heslu.
+- **Nesoulad nového hesla:** Testuje, že metoda vrátí chybu, pokud nové heslo a jeho potvrzení nejsou shodné.
+- **Neplatné nové heslo:** Ověřuje, že metoda vrátí chyby validace, pokud nové heslo nesplňuje bezpečnostní požadavky.
+
+### UserManagementControllerTest
+Třída `UserManagementControllerTest` obsahuje jednotkové testy pro metodu `passwordResetAction()` kontroléru `UserManagementController`. Testy pokrývají následující scénáře:
+- **Úspěšné odeslání e-mailu:** Ověřuje, že e-mail s dočasným heslem je odeslán a heslo je uloženo do databáze, pokud je uživatel nalezen.
+- **Uživatel nenalezen:** Testuje, že metoda vrátí chybovou zprávu, pokud uživatel s danou e-mailovou adresou neexistuje.
+- **Chyba při odesílání e-mailu:** Ověřuje, že metoda vrátí chybovou zprávu, pokud odeslání e-mailu selže.
+
+---
+
 ## Budoucí vylepšení
 - **Dvoufaktorová autentizace (2FA):** Přidání podpory pro dvoufaktorovou autentizaci pro zvýšení bezpečnosti uživatelských účtů.
 - **Historie hesel:** Implementace kontroly, aby uživatel nemohl znovu použít některé z předchozích hesel.
