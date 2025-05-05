@@ -6,6 +6,7 @@ import cz.solutia.acme.core.repository.UserRepository;
 import cz.solutia.acme.core.validator.PasswordValidator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -45,6 +46,7 @@ public class UserService {
      * @param passwordChangeDTO
      * @return List<String> - list of error messages
      */
+    @Transactional
     public List<String> changePassword(Integer userId, PasswordChangeDTO passwordChangeDTO) {
         Optional<User> userOptional = userRepository.findById(userId);
 
