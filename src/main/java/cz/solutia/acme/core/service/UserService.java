@@ -26,7 +26,7 @@ public class UserService {
 
     /**
      * Find user by username
-     * @param username
+     * @param username - User's name for search
      * @return Optional<User>
      */
     public Optional<User> findByUsername(String username) {
@@ -35,15 +35,15 @@ public class UserService {
 
     /**
      * Find user by email
-     * @param email
+     * @param email - User's email for search
      * @return Optional<User>
      */
     public Optional<User> findByEmail(String email) { return userRepository.findByEmail(email); }
 
     /**
      * Change user password
-     * @param userId
-     * @param passwordChangeDTO
+     * @param userId - User's ID
+     * @param passwordChangeDTO DTO with new password
      * @return List<String> - list of error messages
      */
     @Transactional
@@ -80,8 +80,8 @@ public class UserService {
 
     /**
      * Encrypting and saving a password for the user
-     * @param user
-     * @param password
+     * @param user - User object to save the password for
+     * @param password - Password to be saved
      */
     public void savePassword(User user, String password) {
         user.setPassword(bCryptPasswordEncoder.encode(password));
